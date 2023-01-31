@@ -22,6 +22,7 @@ jobs:
 
       - name: Build
         run: |
+          ls
           cd renovate-dummy
           go mod tidy
           go build ./...
