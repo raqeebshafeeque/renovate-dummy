@@ -22,8 +22,6 @@ jobs:
 
       - name: Build
         run: |
-          ls
-          cd renovate-dummy
           go mod tidy
           go build ./...
           echo "Build completed successfully..."
@@ -40,10 +38,8 @@ jobs:
 
       - name: Build
         run: |
-          cd renovate-dummy
           go mod tidy
 
       - name: Test
         run: |
-          cd renovate-dummy
           go test -v ./...
