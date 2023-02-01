@@ -7,6 +7,8 @@ import (
 	"renovatedummy/maths"
 	"renovatedummy/server"
 
+	"github.com/kr/pretty"
+	"github.com/rs/cors"
 	"github.com/sanity-io/litter"
 )
 
@@ -29,8 +31,15 @@ func main() {
 		},
 	})
 
+	pretty.Print(Person{Name: "Raq"})
+
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://foo.com"},
+	})
+
 	http.HandleFunc("/double", server.DoubleHandler)
-	err := http.ListenAndServe(":8080", nil)
+	handler := http.HandlerFunc(server.DoubleHandler)
+	err := http.ListenAndServe(":8080", c.Handler(handler))
 	if err != nil {
 		log.Fatal(err)
 	}
