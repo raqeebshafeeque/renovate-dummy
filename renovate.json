@@ -22,7 +22,7 @@
       "labels": ["UPDATE-MINOR"],
       "postUpdateOptions": ["gomodTidy"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr"
     },
     {
       "description": "Group all go dependencies",
