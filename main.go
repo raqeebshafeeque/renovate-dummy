@@ -32,7 +32,7 @@ func main() {
 	})
 
 	logger := zap.NewExample()
-	defer logger.Sync()
+
 	logger.Info("Just an info log",
 		zap.String("url", "http://example.com"),
 	)
