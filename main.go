@@ -7,9 +7,9 @@ import (
 	"renovatedummy/maths"
 	"renovatedummy/server"
 
-	"github.com/kr/pretty"
 	"github.com/rs/cors"
 	"github.com/sanity-io/litter"
+	"go.uber.org/zap"
 )
 
 func main() {
@@ -31,7 +31,11 @@ func main() {
 		},
 	})
 
-	pretty.Print(Person{Name: "Raq"})
+	logger := zap.NewExample()
+
+	logger.Info("Just an info log",
+		zap.String("url", "http://example.com"),
+	)
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://foo.com"},
