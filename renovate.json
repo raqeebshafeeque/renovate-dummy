@@ -1,10 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
+  "prCreation": "status-success",
   "packageRules": [
     {
       "matchUpdateTypes": ["major"],
-      "labels": ["UPDATE-MAJOR"]
+      "labels": ["UPDATE-MAJOR"],
+      "postUpdateOptions": ["gomodTidy"]
     },
     {
       "matchUpdateTypes": [
@@ -17,7 +19,15 @@
         "rollback",
         "bump"
       ],
-      "labels": ["UPDATE-MINOR"]
+      "labels": ["UPDATE-MINOR"],
+      "postUpdateOptions": ["gomodTidy"],
+      "automerge": true,
+      "automergeType": "branch"
+    },
+    {
+      "description": "Group all go dependencies",
+      "matchPaths": ["go.mod"],
+      "groupName": "Go dependencies"
     }
   ]
 }
