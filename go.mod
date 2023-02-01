@@ -5,9 +5,9 @@ go 1.19
 require (
 	github.com/onsi/ginkgo/v2 v2.8.0
 	github.com/onsi/gomega v1.26.0
-	github.com/rs/cors v1.8.1
+	github.com/rs/cors v1.8.3
 	github.com/sanity-io/litter v1.5.5
-	go.uber.org/zap v1.22.0
+	go.uber.org/zap v1.24.0
 )
 
 require (
