@@ -1,7 +1,8 @@
 package server_test
 
 import (
-	"io/ioutil"
+	"bytes"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -46,11 +47,12 @@ var _ = Describe("Server", func() {
 			res := rec.Result()
 			defer res.Body.Close()
 
-			b, err := ioutil.ReadAll(res.Body)
+			var buf bytes.Buffer
+			_, err = io.Copy(&buf, res.Body)
 			Expect(err).ShouldNot(HaveOccurred())
 
 			Expect(res.StatusCode).Should(Equal(http.StatusBadRequest))
-			Expect(strings.TrimSpace(string(b))).To(Equal(body))
+			Expect(strings.TrimSpace(buf.String())).To(Equal(body))
 		})
 	})
 
@@ -70,11 +72,12 @@ var _ = Describe("Server", func() {
 			res := rec.Result()
 			defer res.Body.Close()
 
-			b, err := ioutil.ReadAll(res.Body)
+			var buf bytes.Buffer
+			_, err = io.Copy(&buf, res.Body)
 			Expect(err).ShouldNot(HaveOccurred())
 
 			Expect(res.StatusCode).Should(Equal(http.StatusOK))
-			Expect(strings.TrimSpace(string(b))).To(Equal(body))
+			Expect(strings.TrimSpace(buf.String())).To(Equal(body))
 		})
 	})
 
@@ -94,11 +97,13 @@ var _ = Describe("Server", func() {
 			res := rec.Result()
 			defer res.Body.Close()
 
-			b, err := ioutil.ReadAll(res.Body)
+			var buf bytes.Buffer
+			_, err = io.Copy(&buf, res.Body)
+			Expect(err).To(BeNil())
 			Expect(err).ShouldNot(HaveOccurred())
 
 			Expect(res.StatusCode).Should(Equal(http.StatusBadRequest))
-			Expect(strings.TrimSpace(string(b))).To(Equal(body))
+			Expect(strings.TrimSpace(buf.String())).To(Equal(body))
 		})
 	})
 
@@ -118,11 +123,12 @@ var _ = Describe("Server", func() {
 
 			defer resp.Body.Close()
 
-			b, err := ioutil.ReadAll(resp.Body)
+			var buf bytes.Buffer
+			_, err = io.Copy(&buf, resp.Body)
 			Expect(err).To(BeNil())
 
 			Expect(resp.StatusCode).Should(Equal(http.StatusOK))
-			Expect(strings.TrimSpace(string(b))).To(Equal(body))
+			Expect(strings.TrimSpace(buf.String())).To(Equal(body))
 		})
 	})
 
