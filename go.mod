@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/onsi/ginkgo/v2 v2.8.0
 	github.com/onsi/gomega v1.26.0
-	github.com/sanity-io/litter v1.5.3
+	github.com/sanity-io/litter v1.5.5
 )
 
 require (
